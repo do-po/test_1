@@ -1,7 +1,7 @@
 ## 기본적인 웹서버 설정
 ## flask 웹프레임 워크를 로드
 
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 ## module 로드
 import database
 
@@ -109,7 +109,15 @@ def login2():
     print(result)
 
     if result:
-        return '로그인 성공'
+        # return '로그인 성공'
+        # 로그인 성공시 main.html을 되돌려준다.
+        # 로그인 정보 중 유저의 이름을 변수에 저장
+
+        user_name = result[0]['name']
+
+        print('로그인을 한 유저의 이름은 : ', user_name)
+
+        return render_template('main.html', _name = user_name) # {{_name}} 이라고 입력되어서 찾아서 넣어줌
     else:
         return redirect('/second')
 
