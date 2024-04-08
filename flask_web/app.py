@@ -13,6 +13,16 @@ import database
 
 app = Flask(__name__) # 현재 파일의 이름을 인자로 받음
 
+## database에 있는 MyDB Class를 생성
+
+_db = database.MyDB(
+    _host = '172.30.1.63', # 교수님 db에 접속
+    _user = 'ubion',
+    _pw = '1234',
+    _db = 'ubion'
+)
+
+
 ## 주소를 생성 (api 생성) -> request 하고 response 할 무언가를 만드는 작업
 ## localhost:5000/ 요청시 index 함수를 호출
     # :5000은 port 번호
@@ -50,13 +60,67 @@ def login():
 
     print(f'유저가 보낸 id : {_id}, 유저가 보낸 비밀번호 : {_pass}')
 
-    # _id가 'test'이고 _pass가 '1234'라면 로그인 성공 메시지 리턴
-    if (_id == 'test') & (_pass == '1234'):
-        return '로그인 성공'
-    # 아니라면 로그인 페이지 (/second)로 돌아간다.
-    else: 
+# 127.0.0.1:5000/login2 [post] 주소 생성
 
+    ## user가 보낸 데이터를 DB server의 정보와 비교
+    ## table명과 column 명에는 `` 넣는거 습관화 :>
+    ## %s == 변수에 들어가 있는 데이터를 받아오는 것
+
+    query = '''
+        select * from user where `id` = %s and `password` = %s 
+    '''
+
+    # _db 안에 있는 sql_query() 함수를 호출
+
+    result = _db.sql_query(query, _id, _pass)
+    print(result)
+    
+    # 로그인이 성공? == result에 데이터가 존재할 때
+    # 로그인이 실패? == result == []
+
+    if result:
+        return '로그인 성공'
+    else: # 로그인 실패시 로그인 화면으로 되돌아간다
         return redirect('/second')
+
+
+# post 방식으로 데이터 전송시
+
+@app.route('/login2', methods = ['post'])
+
+def login2():
+    # get 방식으로 데이터를 보내는 경우 -> request.args
+    # post 방식으로 데이터를 보내는 경우 -> request.form
+
+    req = request.form
+
+    print('post 방식 데이터 : ', req)
+
+    _id = req['input_id']
+    _pass = req['input_pass']
+
+    print(f'유저가 보낸 id : {_id}, 유저가 보낸 비밀번호 : {_pass}')
+
+    query = '''
+        select * from `user` where `id` = %s and `password` = %s
+    '''
+
+    result = _db.sql_query(query, _id, _pass)
+    print(result)
+
+    if result:
+        return '로그인 성공'
+    else:
+        return redirect('/second')
+
+    # # _id가 'test'이고 _pass가 '1234'라면 로그인 성공 메시지 리턴
+    # if (_id == 'test') & (_pass == '1234'):
+    #     return '로그인 성공'
+    # # 아니라면 로그인 페이지 (/second)로 돌아간다.
+    # else: 
+
+    #     return redirect('/second')
+
 
 
 

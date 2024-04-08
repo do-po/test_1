@@ -7,6 +7,7 @@
     </head>
     <body>
         <h1>Login Page</h1>
+        <h3>Get 방식으로 데이터 전송</h3>
 
         <!-- user가 입력할 수 있는 공간 -->
         <!-- user가 입력한 데이터를 서버로 보내는 태그 -->
@@ -30,5 +31,30 @@
             <!-- 제출 버튼 생성 -->
             <input type="submit">
         </form>
+    </body>
+</html>
+
+
+<!-- post 방식으로 data를 전송 -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+        
+    <body>
+        <h3>Post 방식으로 데이터 전송</h3>
+        <form action="/login2" method="post">
+
+            <input type="text" name="input_id"> 
+            <!-- 줄바꿈 태그 -->
+            <br>
+            <input type="password" name="input_pass">
+            <br>
+            <!-- 제출 버튼 생성 -->
+            <input type="submit">
     </body>
 </html>
