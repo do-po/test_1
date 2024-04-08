@@ -1,7 +1,7 @@
 ## 기본적인 웹서버 설정
 ## flask 웹프레임 워크를 로드
 
-from flask import Flask
+from flask import Flask, render_template
 
 ## Flask라는 Class 생성
 
@@ -19,17 +19,24 @@ app = Flask(__name__) # 현재 파일의 이름을 인자로 받음
                 # route에 인자가 있다면 해당 인자를 받으면 아래의 함수를 response
 
 def index():
-    return 'Hello World'
+    # 문자열을 return 하는 것이 아니라 html 문서를 return
+    # return 'Hello World'
+    return render_template('index.html') # render_template라는 함수가 현재 경로 중 templates라는 폴더를 기본 경로로 받도록 설정되어 있기에 이렇게만 적어도 된다.
 
 ## 주소를 생성
 ## localhost:5000/second 라고 요청이 들어온다면 
 
 @app.route('/second')
 def second():
-    return 'Second Page'
+    # return 'Second Page'
+    return render_template('login.html')
+## 주소를 생성
 
+@app.route('/login')
+def login():
+    return ''
 
 ## Flass Class 안에 있는 함수(웹 서버의 구동)를 호출 (이 코드는 항상 제일 마지막에 배치해야 함)
 
-app.run() # 이 환경에서 구동하지 말고 cmd에서 app.py를 python으로 구동하는게 에러가 덜 나옴
+app.run(debug= True) # 이 환경에서 구동하지 말고 cmd에서 app.py를 python으로 구동하는게 에러가 덜 나옴
 

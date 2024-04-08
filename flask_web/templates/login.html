@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>Login Page</h1>
+
+        <!-- user가 입력할 수 있는 공간 -->
+        <!-- user가 입력한 데이터를 서버로 보내는 태그 -->
+        <!-- form 태그는
+            action속성 == user가 입력한 데이터를 보낼 주소
+            method속성 == data를 보내는 방식 (get / post)
+        -->
+        <form action="/login" method="get">
+            <!-- 실제 user가 data를 입력 -->
+            <!-- user가 입력한 데이터를
+            {
+                'input_id' : 유저가 입력한 id,
+                'input_pass' : 유저가 입력한 password
+            }
+            -->
+            <input type="text" name="input_id"> <!-- 여기 닫힘 태그가 없는건 개발자가 작성하는 줄이 아니라 유저가 입력하는 구문이기 때문 -->
+            <!-- 줄바꿈 태그 -->
+            <br>
+            <input type="password" name="input_pass">
+            <br>
+            <!-- 제출 버튼 생성 -->
+            <input type="submit">
+        </form>
+    </body>
+</html>
