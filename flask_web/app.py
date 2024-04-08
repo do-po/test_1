@@ -1,7 +1,9 @@
 ## 기본적인 웹서버 설정
 ## flask 웹프레임 워크를 로드
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
+## module 로드
+import database
 
 ## Flask라는 Class 생성
 
@@ -30,11 +32,33 @@ def index():
 def second():
     # return 'Second Page'
     return render_template('login.html')
+
 ## 주소를 생성
+## 로그인 정보(request 메시지)를 받아오는 주소
 
 @app.route('/login')
 def login():
-    return ''
+    # 해당 주소로 요청이 들어왔을 때 (유저가 보낸 데이터가 포함)
+    ## request.args는 유저가 서버에게 get 방식으로 보낸 데이터가 저장되어 있는 공간
+
+    req = request.args
+    print(req)
+
+    ## user가 보낸 아이디, 패스워드 값을 변수에 저장
+    _id = req['input_id']
+    _pass = req['input_pass']
+
+    print(f'유저가 보낸 id : {_id}, 유저가 보낸 비밀번호 : {_pass}')
+
+    # _id가 'test'이고 _pass가 '1234'라면 로그인 성공 메시지 리턴
+    if (_id == 'test') & (_pass == '1234'):
+        return '로그인 성공'
+    # 아니라면 로그인 페이지 (/second)로 돌아간다.
+    else: 
+
+        return redirect('/second')
+
+
 
 ## Flass Class 안에 있는 함수(웹 서버의 구동)를 호출 (이 코드는 항상 제일 마지막에 배치해야 함)
 
