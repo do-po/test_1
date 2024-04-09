@@ -16,7 +16,7 @@ app = Flask(__name__) # 현재 파일의 이름을 인자로 받음
 ## database에 있는 MyDB Class를 생성
 
 _db = database.MyDB(
-    _host = '172.30.1.63', # 교수님 db에 접속
+    _host = '172.30.1.55', # 교수님 db에 접속
     _user = 'ubion',
     _pw = '1234',
     _db = 'ubion'
@@ -129,10 +129,58 @@ def login2():
 
     #     return redirect('/second')
 
+# 회원 가입 화면을 보여주는 주소를 생성
+
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
+
+# 회원의 정보를 받아오는 주소를 생성
+# 127.0.0.1:5000/signup2 [post]
+
+@app.route('/signup2', methods=['post'])
+def signup2():
+    
+    # 유저가 보낸 정보를 확인 -> 변수에 저장
+    # 유저가 보낸 정보 -> request 안에 저장, 데이터의 형태는 dict로 구성, key는 input으로 받은 name 속성으로 존재, value는 input 태그에 유저가 입력한 데이터로 존재
+    # {input_name : input_data} 
+    # post 방식으로 데이터를 보내면 request 안에 form에 데이터가 존재, get 방식은 args에 존재
+    
+    req = request.form
+    
+    print('회원가입 데이터 : ', dict(req))
+
+    _id = req['input_id']
+    _pass = req['input_pass']
+    _name = req['input_name']
+
+    print(f'회원의 ID = {_id}, 비밀번호 = {_pass}, 이름 = {_name}')
+
+    # 받아온 회원 정보를 DB에 insert 문을 실행
+        # column에 모두 집어넣으려고 하기에 column명은 적지 않아도 된다.
+
+    query = '''
+        insert into 
+        `user`
+        values (%s, %s, %s) 
+    '''
+
+    try:
+        result = _db.sql_query(query, _id, _pass, _name)
+        print(result)
+        
+        # 회원 가입이 완료되었다면
+
+        return redirect('/second')
+    
+    except: # ID는 primary key였기에 중복된 데이터가 들어간다면 오류 발생
+        return 'ID 중복'
+
 
 
 
 ## Flass Class 안에 있는 함수(웹 서버의 구동)를 호출 (이 코드는 항상 제일 마지막에 배치해야 함)
 
 app.run(debug= True) # 이 환경에서 구동하지 말고 cmd에서 app.py를 python으로 구동하는게 에러가 덜 나옴
+                        # 디버깅 모드(저장한 데이터를 바로 서버에 반영)시 run()의 debug 매개변수를 True로 변경
 
