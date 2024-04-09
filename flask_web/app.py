@@ -4,6 +4,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 ## module 로드
 import database
+from datetime import datetime
 
 ## Flask라는 Class 생성
 
@@ -117,9 +118,28 @@ def login2():
 
         print('로그인을 한 유저의 이름은 : ', user_name)
 
-        return render_template('main.html', _name = user_name) # {{_name}} 이라고 입력되어서 찾아서 넣어줌
+        return redirect('/board')
     else:
         return redirect('/second')
+
+# 게시글을 보여주는 주소를 생성
+
+@app.route('/board')
+def board():
+    # DB 서버에 있는 board table의 정보를 로드
+    query = '''
+        select
+        `No`, `title`, `writer`, `create_dt`
+        from
+        `board`
+        order by
+        `No` desc
+    '''
+
+    result = _db.sql_query(query)
+    print(f'board_table의 data : {result}')
+    return render_template('main.html', _data = result, _cnt = len(result))
+
 
     # # _id가 'test'이고 _pass가 '1234'라면 로그인 성공 메시지 리턴
     # if (_id == 'test') & (_pass == '1234'):
@@ -176,11 +196,70 @@ def signup2():
     except: # ID는 primary key였기에 중복된 데이터가 들어간다면 오류 발생
         return 'ID 중복'
 
+# 글쓰기 화면을 보여주는 주소를 생성
+
+@app.route('/write')
+def write():
+    return render_template('write.html')
+
+# 유저가 보내는 글의 정보를 DB 서버에 저장하는 주소
+@app.route('/save_content', methods= ['post'])
+def save_content():
+    # 유저가 보낸 글의 정보를 확인하고 변수에 저장
+    req = request.form
+
+    _title = req['input_title']
+    _writer = req['input_writer']
+    _content = req['input_content']
+
+    print(f'글 제목 : {_title}')
+    print(f'작성자 : {_writer}')
+    print(f'본문 : {_content}')
+
+    # 현재 시간?
+    _time = datetime.now()
+    print(f'현재 시간 : {_time}')
+
+    # DB 서버에 data 저장
+
+    query = '''
+        insert into
+        `board` (`title`, `writer`, `create_dt`, `content`)
+        values (%s, %s, %s, %s)
+'''
+
+    result = _db.sql_query(query, _title, _writer, _time, _content)
+
+    print(f'DB 서버의 결과 : {result}')
+
+    return redirect('/board')
 
 
+# 게시글 하나의 정보를 출력하는 주소를 생성
+@app.route('/read')
+def read():
+    # get 방식으로 보낸 데이터를 변수에 저장
+    _no = request.args['No']
+    print(_no)
+    query = '''
+        select
+        `title`, `writer`, `content`
+        from
+        `board`
+        where
+        `No` = %s
+    '''
+
+    result = _db.sql_query(query, _no)
+    data = result[0] # 데이터가 [{}]로 단 하나만 오기에 list 벗기기 위해 첫번째 원소를 선택하는 것. 이러면 데이터가 {}로 나옴
+
+    print(data)
+
+    return render_template('view_content.html', _data = data)
 
 ## Flass Class 안에 있는 함수(웹 서버의 구동)를 호출 (이 코드는 항상 제일 마지막에 배치해야 함)
 
 app.run(debug= True) # 이 환경에서 구동하지 말고 cmd에서 app.py를 python으로 구동하는게 에러가 덜 나옴
+
                         # 디버깅 모드(저장한 데이터를 바로 서버에 반영)시 run()의 debug 매개변수를 True로 변경
 
