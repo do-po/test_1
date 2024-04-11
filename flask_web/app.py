@@ -76,8 +76,8 @@ def login():
     result = _db.sql_query(query, _id, _pass)
     print(result)
     
-    # 로그인이 성공? == result에 데이터가 존재할 때
-    # 로그인이 실패? == result == []
+    # 로그인이 성공? == result에 데이터가 존재할 때 == True
+    # 로그인이 실패? == result == [] == False
 
     if result:
         return '로그인 성공'
