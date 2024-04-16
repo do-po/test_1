@@ -116,7 +116,7 @@ def search_insta(_text):
 
     # n개의 게시글에서 크롤링
 
-    for i in range(3):
+    for i in range(20):
         # 다음 버튼이 존재하지 않으면 ? -> 에러 발생 
         # try 구문을 이용하여 에러 발생시 print로 출력
         try:
@@ -141,7 +141,7 @@ def search_insta(_text):
             # print(img_src)
 
             image_save(img_src,
-                    './',
+                    './img',
                     f'{_text}_{i}.png')
 
 
@@ -155,7 +155,7 @@ def search_insta(_text):
                                             '._aaqg ._abl-')
             next_element.click()
         except:
-            print('다음 버튼이 존재하지 않거나 에러 발생')
+            print('다음 버튼이 존재하지 않거나 에러 발생') # 이거 insta 댓글이 없으면 에러 발생 메시지가 나오고 다음으로 넘어가는 시간이 걸림 :>
             # 이미지가 아닌 비디오가 올라와 있을 때 다음 이미지로 넘어가기 위한 버튼
             next_element = driver.find_element(By.CSS_SELECTOR, '._aaqg ._abl-')
             next_element.click()
@@ -183,7 +183,7 @@ def search_insta(_text):
         
     df['words2'] = col_data
 
-    df.to_csv(f'{_text}.csv', index=  False)
+    df.to_csv(f'./text/{_text}.csv', index=  False)
 
     # 웹 브라우저 종료
 
