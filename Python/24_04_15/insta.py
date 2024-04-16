@@ -175,7 +175,8 @@ def search_insta(_text):
     for i in range(len(df)):
         nouns = okt.nouns(df.loc[i, 'Commet'])
         if nouns:
-            words = [n for n in nouns if len(n) > 1]
+            words = [n for n in nouns if len(n) > 1] # 리스트 컴프리헨션, n == 표현식 for  항목 in 반복가능객체 if 조건문
+                                                     # for문과 조건문을 한 줄로 사용하기 위해 사용하는 구문임
         else:
             words = ''
         col_data.append(words)
