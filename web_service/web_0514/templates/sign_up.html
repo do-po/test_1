@@ -261,14 +261,14 @@
     </main>
     <script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
     <script>
-      // id가 pass2인 태그를 선택하여 키보드 입력 이벤트가 발생했을 때
-        $('#pass2').keyup(
+      // id가 pass1, pass2인 태그를 선택하여 키보드 입력 이벤트가 발생했을 때
+        $('#pass1, #pass2').keyup(
           function(){
             // id가 pass1인 태그의 입력된 값을 변수에 저장
             let pass1 = $('#pass1').val()
-            // let pass2 = $('#pass2').val()
-            // 위와 아래는 같은 구문 (행위? 위에서 function의 주체를 this로 받아옴)
-            let pass2 = $(this).val()
+            // let pass2 = $(this).val()
+            // 위 pass1,pass2 다 받아옴 (행위의 주체? 위에서 function의 주체를 this로 받아옴)
+            let pass2 = $('#pass2').val()
             // 조건식 1 : pass1 == pass2
             // 조건식 2 : pass1 != "" and pass2 !=""
             if ((pass1 == pass2) & (pass1 != "") & (pass2 !="")){
