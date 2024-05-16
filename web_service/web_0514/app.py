@@ -2,16 +2,28 @@
 # flask, html을 text로 받아오는 render_template, request, 페이지 이동하는 redirect
     # url_for는 외부 데이터 경로 지정하는 것
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 
 # mysql과 연동을 하는 라이브러리 로드
 
 import pymysql
-import pymysql.cursors
+from datetime import timedelta
 
 # Flask라는 class 생성 (인자를 파일명으로 받아옴, 파일명이 이 파일의 이름일 경우 __name__)
 
 app = Flask(__name__)
+
+# secret_key 설정 (session data 암호화 키)
+
+app.secret_key = 'ABC'
+
+# 세션 데이터의 생명주기(지속시간)을 설정
+
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(seconds= 15)
+
+# 세션 데이터 초기화 (web 열었을 때 이전의 세션이 남아있을 지 모르기 때문)
+
+# session.clear()
 
 # DB server와 연결 -> 가상 공간 Cursor 생성 -> 
 # 매개변수 query문, data 값을 이용하여 -> 질의 보냄 (execute) ->
@@ -65,19 +77,30 @@ def db_execute(query, *data): # *data == data 매개변수의 갯수는 가변�
 @app.route("/")
 def sign_in():
     
-    # 요청이 들어왔을 때 state라는 데이터가 존재하면
+    # 세션에 데이터가 존재한다면 ?
+        # /index로 다시 보내서 main으로 보내기 (로그인을 이미 했다면 다시 로그인 화면을 띄워주지 않는 것)
 
-    try: # 로그인이 실패해서 redirect로 state가 2 인 값을 받아오는 경우
-        _state = request.args['state']
-
-    # 예외가 발생
-
-    except: # 처음 로그인을 하는 경우
-        _state = "1"
-
-    # log_in.html과 state를 되돌려준다.
+    if 'user_id' in session:
+        return redirect('/index')
     
-    return render_template('log_in.html', state = _state)
+    # 세션에 데이터가 없다면 ?
+        # 로그인이 되어있지 않는다면 로그인 화면 보여주는 것
+
+    else:
+
+        # 주소로 접속 요청이 들어왔을 때 state라는 데이터가 존재하면
+
+        try: # 로그인이 실패해서 redirect로 state가 2 인 값을 받아오는 경우
+            _state = request.args['state']
+
+        # 예외가 발생
+
+        except: # 처음 로그인을 하는 경우
+            _state = "1"
+
+        # log_in.html과 state를 되돌려준다.
+        
+        return render_template('log_in.html', state = _state)
 
 # 로그인 화면에서 id, password 데이터를 보내는 api 생성
 
@@ -100,11 +123,11 @@ def main():
     select
     *
     from
-    user
+    `user`
     where
-    id = %s
+    `id` = %s
     and
-    password = %s
+    `password` = %s
     '''
 
     # 함수를 호출
@@ -117,8 +140,15 @@ def main():
         # main.html return
 
     if db_result:
-        return render_template('main.html')
-        # frontend 아직 안 만들었는데 테스트 하고 싶은 경우
+
+        # 로그인이 성공하는 경우  session에 데이터를 저장
+            # session 역시 dict 형태이기에 dict에 새 key:value 저장하는 형식으로 생성
+
+        session['user_id']  = _id
+        session['user_pass'] = _pass
+
+        return redirect('/index')
+        # frontend 아직 안 만들었는데 테스트 하고 싶은 경우(postman 같은거)
         # 위의 return 주석 처리 하고 아래 결과 나오는 지 확인하면 됨
         # return 'Login OK'
 
@@ -128,6 +158,19 @@ def main():
     else:
         return redirect('/?state=2')
         # return 'Login Fail'
+
+# index 주소 api 생성
+
+@app.route('/index')
+def index2():
+    
+    # 세션에 데이터가 존재한다면 main.html 되돌려준다
+    if 'user_id' in session:
+        return render_template('/main.html')
+
+    # 세션에 데이터가 존재하지 않는다면 login 화면 되돌려준다
+    else:
+        return redirect('/')
 
 # 회원 가입 화면을 보여주는 api 생성
 
@@ -153,7 +196,7 @@ def check_id():
         select
         *
         from
-        user
+        `user`
         where
         id = %s
     """
@@ -198,7 +241,7 @@ def sign_up2():
 
     try:
         db_result = db_execute(user_data_query, _id, _pass, _name)
-        print(db_result) # 이거 사실 필요 없긴한데 (어차피 Query Done 나오니까) 잘 들어갔는 지 확인하려고 넣는 구문
+        print(db_result) # 이거 사실 필요 없긴한데 (어차피 Query Done 나오니까) 잘 들어갔는 지 내용 확인하려고 넣는 구문
 
     except:
         db_result = "3" # 왜 log_in으로 가려고 하지 ?? sign_up으로 가는게 더 좋지 않을까 싶은데 음... 그래야 다시 id 넣어서 회원가입 시도할텐데 말야. log_in으로 가면 다시 sign_up으로 가는 버튼 눌러야 되잖아
@@ -210,7 +253,19 @@ def sign_up2():
     else:
         return redirect('/')
     
+# 로그아웃
+@app.route('/log_out')
+def log_out():
+    
+    # 세션 데이터를 제거
 
+    # session.pop('user_id', None)
+    # session.pop('user_pass', None)
+    session.clear()
+
+    # 로그인 페이지로 이동
+
+    return redirect('/')
 
 
 

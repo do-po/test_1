@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.122.0">
-    <title>Signin Template · Bootstrap v5.3</title>
+    <title>Sign_in</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/">
 
@@ -118,6 +118,7 @@
               let input_id = $('input[name="input_id"]').val()
 
               // 유저가 입력한 id 값을 ajax를 통해 서버에게 비동기 통신으로 보낸다
+                // dataType은 요청을 보낸 후 내가 받아오는 데이터(return)의 타입을 의미하는 것 :>
               $.ajax(
                 {
                   url : '/check_id',
@@ -226,11 +227,11 @@
           <label for="floatingInput">ID</label>
         </div>
         
-        <!-- ID 중복 체크 버튼(버튼으로 만들면 form의 action 발생시키니깐 하이퍼링크를 만들고 버튼모양으로 변경) 생성 -->
-        <a
+        <!-- ID 중복 체크 버튼 생성 -->
+        <p
           id="check_id" 
           class="btn btn-info w-100 py-2"
-          style="margin-top: 7px;">Check ID</a>
+          style="margin-top: 7px;">Check ID</p>
 
         <!-- id가 user_info인 영역 생성 -->
         <div id="user_info" style="display: none;">

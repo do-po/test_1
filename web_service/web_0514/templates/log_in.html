@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.122.0">
-    <title>Signin Template · Bootstrap v5.3</title>
+    <title>Log_in</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/">
 
@@ -100,8 +100,20 @@
     
     <!-- Custom styles for this template -->
     <link href="{{url_for('static', filename='css/sign-in.css')}}" rel="stylesheet">
+
+    <script>
+      function check_state(_state){
+        // _state == 2 
+        if (_state == '2'){
+          alert('Login Failed')
+        }else if(_state == '3'){
+          alert('Please retry after few seconds.')
+        }
+      }
+    </script>
+
   </head>
-  <body class="d-flex align-items-center py-4 bg-body-tertiary">
+  <body onload="check_state('{{state}}')" class="d-flex align-items-center py-4 bg-body-tertiary">
   
     <!-- 라이트/다크 모드 변환 아이콘 -->
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
