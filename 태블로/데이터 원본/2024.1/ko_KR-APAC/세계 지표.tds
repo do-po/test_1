@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- build near.18.0220.2210                                -->
+<datasource formatted-name="전 세계 지표" inline="true" source-platform="win" version="18.1" xmlns:user="http://www.tableausoftware.com/xml/user">
+  <connection class="federated">
+    <named-connections>
+      <named-connection caption="전 세계 지표" name="hyper.02tkzk21390wwr18vjk7f1tnp84z">
+        <connection authentication="auth-none" author-locale="ko_KR" class="hyper" dbname="세계 지표.hyper" default-settings="yes" sslmode="" username="tableau_internal_user" />
+      </named-connection>
+    </named-connections>
+    <relation connection="hyper.02tkzk21390wwr18vjk7f1tnp84z" name="Extract" table="[Extract].[Extract]" type="table" />
+    <metadata-records>
+      <metadata-record class="column">
+        <remote-name>출생률</remote-name>
+        <remote-type>5</remote-type>
+        <local-name>[출생률]</local-name>
+        <parent-name>[Extract]</parent-name>
+        <remote-alias>출생률</remote-alias>
+        <ordinal>0</ordinal>
+        <local-type>real</local-type>
+        <aggregation>Sum</aggregation>
+        <approx-count>47</approx-count>
+        <contains-null>true</contains-null>
+      </metadata-record>
+      <metadata-record class="column">
+        <remote-name>영업세율</remote-name>
+        <remote-type>5</remote-type>
+        <local-name>[영업세율]</local-name>
+        <parent-name>[Extract]</parent-name>
+        <remote-alias>영업세율</remote-alias>
+        <ordinal>1</ordinal>
+        <local-type>real</local-type>
+        <aggregation>Sum</aggregation>
+        <approx-count>258</approx-count>
+        <contains-null>true</contains-null>
+      </metadata-record>
+      <metadata-record class="column">
+        <remote-name>이산화탄소 배출량</remote-name>
+        <remote-type>20</remote-type>
+        <local-name>[이산화탄소 배출량]</local-name>
+        <parent-name>[Extract]</parent-name>
+        <remote-alias>이산화탄소 배출량</remote-alias>
+        <ordinal>2</ordinal>
+        <local-type>integer</local-type>
+        <aggregation>Sum</aggregation>
+        <approx-count>1012</approx-count>
+        <contains-null>true</contains-null>
+      </metadata-record>
+      <metadata-record class="column">
+        <remote-name>국가/지역</remote-name>
+        <remote-type>129</remote-type>
+        <local-name>[국가/지역]</local-name>
+        <parent-name>[Extract]</parent-name>
+        <remote-alias>국가/지역</remote-alias>
+        <ordinal>3</ordinal>
+        <local-type>string</local-type>
+        <aggregation>Count</aggregation>
+        <approx-count>209</approx-count>
+        <contains-null>true</contains-null>
+        <collation flag="0" name="LEN_RUS" />
+      </metadata-record>
+      <metadata-record class="column">
+        <remote-name>영업 개시 기간(일)</remote-name>
+        <remote-type>20</remote-type>
+        <local-name>[영업 개시 기간(일)]</local-name>
+        <parent-name>[Extract]</parent-name>
+        <remote-alias>영업 개시 기간(일)</remote-alias>
+        <ordinal>4</ordinal>
+        <local-type>integer</local-type>
+        <aggregation>Sum</aggregation>
+        <approx-count>109</approx-count>
+        <contains-null>true</contains-null>
+      </metadata-record>
+      <metadata-record class="column">
+        <remote-name>비즈니스 용이성</remote-name>
+        <remote-type>5</remote-type>
+        <local-name>[비즈니스 용이성]</local-name>
+        <parent-name>[Extract]</parent-name>
+        <remote-alias>비즈니스 용이성</remote-alias>
+        <ordinal>5</ordinal>
+        <local-type>real</local-type>
+        <aggregation>Sum</aggregation>
+        <approx-count>59</approx-count>
+        <contains-null>true</contains-null>
+      </metadata-record>
+      <metadata-record class="column">
+        <remote-name>에너지 사용률</remote-name>
+        <remote-type>20</remote-type>
+        <local-name>[에너지 사용률]</local-name>
+        <parent-name>[Extract]</parent-name>
+        <remote-alias>에너지 사용률</remote-alias>
+        <ordinal>6</ordinal>
+        <local-type>integer</local-type>
+        <aggregation>Sum</aggregation>
+        <approx-count>775</approx-count>
+        <contains-null>true</contains-null>
+      </metadata-record>
+      <metadata-record class="column">
+        <remote-name>GDP</remote-name>
+        <remote-type>5</remote-type>
+        <local-name>[GDP]</local-name>
+        <parent-name>[Extract]</parent-name>
+        <remote-alias>GDP</remote-alias>
+        <ordinal>7</ordinal>
+        <local-type>real</local-type>
+        <aggregation>Sum</aggregation>
+        <approx-count>2704</approx-count>
+        <contains-null>true</contains-null>
+      </metadata-record>
+      <metadata-record class="column">
+        <remote-name>의료비 지출(GDP %)</remote-name>
+        <remote-type>5</remote-type>
+        <local-name>[의료비 지출(GDP %)]</local-name>
+        <parent-name>[Extract]</parent-name>
+        <remote-alias>의료비 지출(GDP %)</remote-alias>
+        <ordinal>8</ordinal>
+        <local-type>real</local-type>
+        <aggregation>Sum</aggregation>
+        <approx-count>113</approx-count>
+        <contains-null>true</contains-null>
+      </metadata-record>
+      <metadata-record class="column">
+        <remote-name>의료비 지출(1인당)</remote-name>
+        <remote-type>20</remote-type>
+        <local-name>[의료비 지출(1인당)]</local-name>
+        <parent-name>[Extract]</parent-name>
+        <remote-alias>의료비 지출(1인당)</remote-alias>
+        <ordinal>9</ordinal>
+        <local-type>integer</local-type>
+        <aggregation>Sum</aggregation>
+        <approx-count>629</approx-count>
+        <contains-null>true</contains-null>
+      </metadata-record>
+      <metadata-record class="column">
+        <remote-name>세금 정리 시간</remote-name>
+        <remote-type>5</remote-type>
+        <local-name>[세금 정리 시간]</local-name>
+        <parent-name>[Extract]</parent-name>
+        <remote-alias>세금 정리 시간</remote-alias>
+        <ordinal>10</ordinal>
+        <local-type>real</local-type>
+        <aggregation>Sum</aggregation>
+        <approx-count>188</approx-count>
+        <contains-null>true</contains-null>
+      </metadata-record>
+      <metadata-record class="column">
+        <remote-name>유아 사망률</remote-name>
+        <remote-type>5</remote-type>
+        <local-name>[유아 사망률]</local-name>
+        <parent-name>[Extract]</parent-name>
+        <remote-alias>유아 사망률</remote-alias>
+        <ordinal>11</ordinal>
+        <local-type>real</local-type>
+        <aggregation>Sum</aggregation>
+        <approx-count>109</approx-count>
+        <contains-null>true</contains-null>
+      </metadata-record>
+      <metadata-record class="column">
+        <remote-name>인터넷 사용률</remote-name>
+        <remote-type>5</remote-type>
+        <local-name>[인터넷 사용률]</local-name>
+        <parent-name>[Extract]</parent-name>
+        <remote-alias>인터넷 사용률</remote-alias>
+        <ordinal>12</ordinal>
+        <local-type>real</local-type>
+        <aggregation>Sum</aggregation>
+        <approx-count>473</approx-count>
+        <contains-null>true</contains-null>
+      </metadata-record>
+      <metadata-record class="column">
+        <remote-name>대출 이자</remote-name>
+        <remote-type>5</remote-type>
+        <local-name>[대출 이자]</local-name>
+        <parent-name>[Extract]</parent-name>
+        <remote-alias>대출 이자</remote-alias>
+        <ordinal>13</ordinal>
+        <local-type>real</local-type>
+        <aggregation>Sum</aggregation>
+        <approx-count>224</approx-count>
+        <contains-null>true</contains-null>
+      </metadata-record>
+      <metadata-record class="column">
+        <remote-name>여성 예상 수명</remote-name>
+        <remote-type>20</remote-type>
+        <local-name>[여성 예상 수명]</local-name>
+        <parent-name>[Extract]</parent-name>
+        <remote-alias>여성 예상 수명</remote-alias>
+        <ordinal>14</ordinal>
+        <local-type>integer</local-type>
+        <aggregation>Sum</aggregation>
+        <approx-count>47</approx-count>
+        <contains-null>true</contains-null>
+      </metadata-record>
+      <metadata-record class="column">
+        <remote-name>남성 예상 수명</remote-name>
+        <remote-type>20</remote-type>
+        <local-name>[남성 예상 수명]</local-name>
+        <parent-name>[Extract]</parent-name>
+        <remote-alias>남성 예상 수명</remote-alias>
+        <ordinal>15</ordinal>
+        <local-type>integer</local-type>
+        <aggregation>Sum</aggregation>
+        <approx-count>43</approx-count>
+        <contains-null>true</contains-null>
+      </metadata-record>
+      <metadata-record class="column">
+        <remote-name>휴대폰 사용률</remote-name>
+        <remote-type>5</remote-type>
+        <local-name>[휴대폰 사용률]</local-name>
+        <parent-name>[Extract]</parent-name>
+        <remote-alias>휴대폰 사용률</remote-alias>
+        <ordinal>16</ordinal>
+        <local-type>real</local-type>
+        <aggregation>Sum</aggregation>
+        <approx-count>984</approx-count>
+        <contains-null>true</contains-null>
+      </metadata-record>
+      <metadata-record class="column">
+        <remote-name>모집단 0~14세</remote-name>
+        <remote-type>5</remote-type>
+        <local-name>[모집단 0~14세]</local-name>
+        <parent-name>[Extract]</parent-name>
+        <remote-alias>모집단 0~14세</remote-alias>
+        <ordinal>17</ordinal>
+        <local-type>real</local-type>
+        <aggregation>Sum</aggregation>
+        <approx-count>327</approx-count>
+        <contains-null>true</contains-null>
+      </metadata-record>
+      <metadata-record class="column">
+        <remote-name>모집단 15~64세</remote-name>
+        <remote-type>5</remote-type>
+        <local-name>[모집단 15~64세]</local-name>
+        <parent-name>[Extract]</parent-name>
+        <remote-alias>모집단 15~64세</remote-alias>
+        <ordinal>18</ordinal>
+        <local-type>real</local-type>
+        <aggregation>Sum</aggregation>
+        <approx-count>249</approx-count>
+        <contains-null>true</contains-null>
+      </metadata-record>
+      <metadata-record class="column">
+        <remote-name>모집단 65세 이상</remote-name>
+        <remote-type>5</remote-type>
+        <local-name>[모집단 65세 이상]</local-name>
+        <parent-name>[Extract]</parent-name>
+        <remote-alias>모집단 65세 이상</remote-alias>
+        <ordinal>19</ordinal>
+        <local-type>real</local-type>
+        <aggregation>Sum</aggregation>
+        <approx-count>168</approx-count>
+        <contains-null>true</contains-null>
+      </metadata-record>
+      <metadata-record class="column">
+        <remote-name>모집단 총계</remote-name>
+        <remote-type>20</remote-type>
+        <local-name>[모집단 총계]</local-name>
+        <parent-name>[Extract]</parent-name>
+        <remote-alias>모집단 총계</remote-alias>
+        <ordinal>20</ordinal>
+        <local-type>integer</local-type>
+        <aggregation>Sum</aggregation>
+        <approx-count>2704</approx-count>
+        <contains-null>true</contains-null>
+      </metadata-record>
+      <metadata-record class="column">
+        <remote-name>모집단 도시</remote-name>
+        <remote-type>5</remote-type>
+        <local-name>[모집단 도시]</local-name>
+        <parent-name>[Extract]</parent-name>
+        <remote-alias>모집단 도시</remote-alias>
+        <ordinal>21</ordinal>
+        <local-type>real</local-type>
+        <aggregation>Sum</aggregation>
+        <approx-count>693</approx-count>
+        <contains-null>true</contains-null>
+      </metadata-record>
+      <metadata-record class="column">
+        <remote-name>지역</remote-name>
+        <remote-type>129</remote-type>
+        <local-name>[지역]</local-name>
+        <parent-name>[Extract]</parent-name>
+        <remote-alias>지역</remote-alias>
+        <ordinal>22</ordinal>
+        <local-type>string</local-type>
+        <aggregation>Count</aggregation>
+        <approx-count>6</approx-count>
+        <contains-null>true</contains-null>
+        <collation flag="0" name="LEN_RUS" />
+      </metadata-record>
+      <metadata-record class="column">
+        <remote-name>국내 관광</remote-name>
+        <remote-type>5</remote-type>
+        <local-name>[국내 관광]</local-name>
+        <parent-name>[Extract]</parent-name>
+        <remote-alias>국내 관광</remote-alias>
+        <ordinal>23</ordinal>
+        <local-type>real</local-type>
+        <aggregation>Sum</aggregation>
+        <approx-count>1198</approx-count>
+        <contains-null>true</contains-null>
+      </metadata-record>
+      <metadata-record class="column">
+        <remote-name>해외 관광</remote-name>
+        <remote-type>20</remote-type>
+        <local-name>[해외 관광]</local-name>
+        <parent-name>[Extract]</parent-name>
+        <remote-alias>해외 관광</remote-alias>
+        <ordinal>24</ordinal>
+        <local-type>integer</local-type>
+        <aggregation>Sum</aggregation>
+        <approx-count>889</approx-count>
+        <contains-null>true</contains-null>
+      </metadata-record>
+      <metadata-record class="column">
+        <remote-name>연도</remote-name>
+        <remote-type>133</remote-type>
+        <local-name>[연도]</local-name>
+        <parent-name>[Extract]</parent-name>
+        <remote-alias>연도</remote-alias>
+        <ordinal>25</ordinal>
+        <local-type>date</local-type>
+        <aggregation>Year</aggregation>
+        <approx-count>13</approx-count>
+        <contains-null>true</contains-null>
+      </metadata-record>
+    </metadata-records>
+  </connection>
+  <column datatype="string" name="[국가/지역]" role="dimension" semantic-role="[Country].[ISO3166_2]" type="nominal" />
+  <column datatype="integer" name="[Number of Records]" role="measure" type="quantitative" user:auto-column="numrec">
+    <calculation class="tableau" formula="1" />
+  </column>
+  <folder name="비즈니스" role="measures">
+    <folder-item name="[영업세율]" type="field" />
+    <folder-item name="[영업 개시 기간(일)]" type="field" />
+    <folder-item name="[비즈니스 용이성]" type="field" />
+    <folder-item name="[세금 정리 시간]" type="field" />
+    <folder-item name="[대출 이자]" type="field" />
+  </folder>
+  <folder name="개발" role="measures">
+    <folder-item name="[이산화탄소 배출량]" type="field" />
+    <folder-item name="[에너지 사용률]" type="field" />
+    <folder-item name="[GDP]" type="field" />
+    <folder-item name="[인터넷 사용률]" type="field" />
+    <folder-item name="[휴대폰 사용률]" type="field" />
+    <folder-item name="[국내 관광]" type="field" />
+    <folder-item name="[해외 관광]" type="field" />
+  </folder>
+  <folder name="의료" role="measures">
+    <folder-item name="[의료비 지출(GDP %)]" type="field" />
+    <folder-item name="[의료비 지출(1인당)]" type="field" />
+    <folder-item name="[유아 사망률]" type="field" />
+    <folder-item name="[여성 예상 수명]" type="field" />
+    <folder-item name="[남성 예상 수명]" type="field" />
+  </folder>
+  <folder name="인구" role="measures">
+    <folder-item name="[출생률]" type="field" />
+    <folder-item name="[모집단 0~14세]" type="field" />
+    <folder-item name="[모집단 15~64세]" type="field" />
+    <folder-item name="[모집단 65세 이상]" type="field" />
+    <folder-item name="[모집단 총계]" type="field" />
+    <folder-item name="[모집단 도시]" type="field" />
+  </folder>
+  <layout dim-ordering="alphabetic" dim-percentage="0.311912" measure-ordering="alphabetic" measure-percentage="0.443574" parameter-percentage="0.244514" show-structure="false" />
+  <semantic-values>
+    <semantic-value key="[Country].[Name]" value="&quot;United States&quot;" />
+  </semantic-values>
+</datasource>
